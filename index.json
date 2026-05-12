@@ -9,5 +9,16 @@
     "has_specs": true,
     "has_torque": true,
     "file": "blueprints/00000013.json"
+  },
+  {
+    "id": "00000015",
+    "year": "2020",
+    "make": "Ford",
+    "model": "F-150",
+    "label": "2020 Ford F-150",
+    "service_count": 7,
+    "has_specs": true,
+    "has_torque": true,
+    "file": "blueprints/Ford/2020/F-150/00000015.json"
   }
 ]
