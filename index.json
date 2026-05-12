@@ -9,5 +9,16 @@
     "has_specs": true,
     "has_torque": true,
     "file": "blueprints/00000004.json"
+  },
+  {
+    "id": "00000005",
+    "year": "2019",
+    "make": "Honda",
+    "model": "Civic",
+    "label": "2019 Honda Civic",
+    "service_count": 3,
+    "has_specs": true,
+    "has_torque": true,
+    "file": "blueprints/00000005.json"
   }
 ]
