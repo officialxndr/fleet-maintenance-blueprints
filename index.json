@@ -1,16 +1,5 @@
 [
   {
-    "id": "00000004",
-    "year": "2021",
-    "make": "Ford",
-    "model": "F-150",
-    "label": "2021 Ford F-150",
-    "service_count": 2,
-    "has_specs": true,
-    "has_torque": true,
-    "file": "blueprints/00000004.json"
-  },
-  {
     "id": "00000005",
     "year": "2019",
     "make": "Honda",
