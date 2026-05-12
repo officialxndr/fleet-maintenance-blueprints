@@ -14,6 +14,8 @@ jobs:
     permissions:
       contents: write
       issues: write
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       - uses: actions/checkout@v4
@@ -90,7 +92,8 @@ jobs:
             const filePath = 'blueprints/' + id + '.json';
             const label    = [bp.year, bp.make, bp.model].filter(Boolean).join(' ');
 
-            // Write blueprint file
+            // Write blueprint file (create blueprints/ dir if it doesn't exist yet)
+            fs.mkdirSync('blueprints', { recursive: true });
             fs.writeFileSync(filePath, JSON.stringify(bp, null, 2) + '\n');
 
             // Update index.json
