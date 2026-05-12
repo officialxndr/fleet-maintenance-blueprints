@@ -1,13 +1,1 @@
-[
-  {
-    "id": "00000012",
-    "year": "2019",
-    "make": "Honda",
-    "model": "Civic",
-    "label": "2019 Honda Civic",
-    "service_count": 7,
-    "has_specs": true,
-    "has_torque": true,
-    "file": "blueprints/00000012.json"
-  }
-]
+[]
