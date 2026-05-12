@@ -1,0 +1,186 @@
+{
+  "blueprint_version": 1,
+  "year": "2020",
+  "make": "Ford",
+  "model": "F-150",
+  "services": [
+    {
+      "category": "Engine",
+      "name": "Engine Oil & Filter",
+      "interval_months": 12,
+      "interval_miles": 7500,
+      "parts_info": "6 qts 5W-30",
+      "inspect_interval_months": 0,
+      "inspect_interval_miles": 0,
+      "garage_parts": [
+        {
+          "name": "Oil Filter",
+          "value": "Motorcraft FL-820S"
+        },
+        {
+          "name": "Drain Plug Washer",
+          "value": "Motorcraft EC-3Z-6734-C"
+        }
+      ],
+      "garage_torque": [
+        {
+          "name": "Drain Plug",
+          "value": "19 ft-lbs"
+        }
+      ]
+    },
+    {
+      "category": "Brakes",
+      "name": "Brake Pads",
+      "interval_months": 60,
+      "interval_miles": 50000,
+      "parts_info": "Front & rear pads",
+      "inspect_interval_months": 24,
+      "inspect_interval_miles": 20000,
+      "garage_parts": [
+        {
+          "name": "Front Brake Pads",
+          "value": "Motorcraft BR-1825A"
+        },
+        {
+          "name": "Rear Brake Pads",
+          "value": "Motorcraft BR-1826A"
+        }
+      ],
+      "garage_torque": [
+        {
+          "name": "Caliper Bolt",
+          "value": "27 ft-lbs"
+        },
+        {
+          "name": "Caliper Bracket Bolt",
+          "value": "148 ft-lbs"
+        },
+        {
+          "name": "Lug Nuts",
+          "value": "150 ft-lbs"
+        }
+      ]
+    },
+    {
+      "category": "Engine",
+      "name": "Air Filter",
+      "interval_months": 24,
+      "interval_miles": 30000,
+      "parts_info": "Motorcraft FA-1883",
+      "inspect_interval_months": 12,
+      "inspect_interval_miles": 15000,
+      "garage_parts": [
+        {
+          "name": "Air Filter",
+          "value": "Motorcraft FA-1883"
+        }
+      ],
+      "garage_torque": []
+    },
+    {
+      "category": "Tires",
+      "name": "Tire Rotation",
+      "interval_months": 6,
+      "interval_miles": 7500,
+      "parts_info": "",
+      "inspect_interval_months": 0,
+      "inspect_interval_miles": 0,
+      "garage_parts": [],
+      "garage_torque": [
+        {
+          "name": "Lug Nuts",
+          "value": "150 ft-lbs"
+        }
+      ]
+    },
+    {
+      "category": "Engine",
+      "name": "Spark Plugs",
+      "interval_months": 72,
+      "interval_miles": 60000,
+      "parts_info": "Motorcraft SP-546",
+      "inspect_interval_months": 0,
+      "inspect_interval_miles": 0,
+      "garage_parts": [
+        {
+          "name": "Spark Plugs (x8)",
+          "value": "Motorcraft SP-546"
+        }
+      ],
+      "garage_torque": [
+        {
+          "name": "Spark Plugs",
+          "value": "11 ft-lbs"
+        }
+      ]
+    },
+    {
+      "category": "Transmission",
+      "name": "Transmission Fluid",
+      "interval_months": 60,
+      "interval_miles": 60000,
+      "parts_info": "Motorcraft MERCON LV � 13.1 qts",
+      "inspect_interval_months": 0,
+      "inspect_interval_miles": 0,
+      "garage_parts": [
+        {
+          "name": "Transmission Fluid",
+          "value": "Motorcraft XT-10-QLVC"
+        }
+      ],
+      "garage_torque": []
+    },
+    {
+      "category": "Cooling",
+      "name": "Cabin Air Filter",
+      "interval_months": 12,
+      "interval_miles": 15000,
+      "parts_info": "Motorcraft FP-67",
+      "inspect_interval_months": 0,
+      "inspect_interval_miles": 0,
+      "garage_parts": [
+        {
+          "name": "Cabin Air Filter",
+          "value": "Motorcraft FP-67"
+        }
+      ],
+      "garage_torque": []
+    }
+  ],
+  "torque_specs": [
+    {
+      "component": "Lug Nuts",
+      "torque": "150 ft-lbs",
+      "labels": ""
+    },
+    {
+      "component": "Drain Plug",
+      "torque": "19 ft-lbs",
+      "labels": ""
+    },
+    {
+      "component": "Caliper Bolt",
+      "torque": "27 ft-lbs",
+      "labels": ""
+    },
+    {
+      "component": "Caliper Bracket Bolt",
+      "torque": "148 ft-lbs",
+      "labels": ""
+    },
+    {
+      "component": "Spark Plugs",
+      "torque": "11 ft-lbs",
+      "labels": ""
+    }
+  ],
+  "specs": {
+    "engine_oil": "5W-30 Full Synthetic",
+    "oil_filter": "Motorcraft FL-820S",
+    "tire_size": "275/55R20",
+    "tire_pressure": "35 psi",
+    "wiper_blades": "22\" front, 22\" rear",
+    "manual_url": ""
+  }
+}
