@@ -7,9 +7,8 @@ on:
 jobs:
   review:
     # Only run when a maintainer comments /approve or /deny on a blueprint submission issue
-    if: |
-      contains(github.event.issue.labels.*.name, 'blueprint-submission') &&
-      (github.event.comment.body == '/approve' || startsWith(github.event.comment.body, '/deny'))
+        if: "(contains(github.event.issue.labels.*.name, 'blueprint-submission') && (github.event.comment.body == '/approve' || startsWith(github.event.comment.body, '/deny') || startsWith(github.event.comment.body, '/replace'))) || startsWith(github.event.comment.body, '/delete')"
+
     runs-on: ubuntu-latest
     permissions:
       contents: write
