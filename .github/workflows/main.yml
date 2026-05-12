@@ -51,6 +51,17 @@ jobs:
               });
             }
 
+            function sanitizeSegment(s) {
+              return (s || 'Unknown').trim().replace(/[\/\\:*?"<>|]/g, '-').trim() || 'Unknown';
+            }
+
+            function blueprintDir(bp) {
+              const make  = sanitizeSegment(bp.make);
+              const year  = sanitizeSegment(bp.year);
+              const model = sanitizeSegment(bp.model);
+              return 'blueprints/' + make + '/' + year + '/' + model;
+            }
+
             // ── DENY ──────────────────────────────────────────────────────────
             if (comment.startsWith('/deny')) {
               const reason = comment.replace('/deny', '').trim();
@@ -66,14 +77,19 @@ jobs:
                 await postComment('❌ Usage: `/delete <id>` — e.g. `/delete 00000004`');
                 return;
               }
-              const filePath = 'blueprints/' + id + '.json';
+              const index = JSON.parse(fs.readFileSync('index.json', 'utf8'));
+              const entry = index.find(function(e) { return e.id === id; });
+              if (!entry) {
+                await postComment('❌ No blueprint found with ID `' + id + '` in the index.');
+                return;
+              }
+              const filePath = entry.file;
               if (fs.existsSync(filePath)) {
                 fs.unlinkSync(filePath);
               } else {
-                await postComment('❌ No blueprint file found with ID `' + id + '`.');
+                await postComment('❌ Index entry exists for `' + id + '` but the file `' + filePath + '` was not found.');
                 return;
               }
-              const index = JSON.parse(fs.readFileSync('index.json', 'utf8'));
               const filtered = index.filter(function(e) { return e.id !== id; });
               fs.writeFileSync('index.json', JSON.stringify(filtered, null, 2) + '\n');
               execSync('git config user.name  "fleet-blueprints-bot"');
@@ -96,11 +112,12 @@ jobs:
               if (!match) { await postComment('❌ Could not find a JSON code block in this issue.'); return; }
               let bp;
               try { bp = JSON.parse(match[1]); } catch (e) { await postComment('❌ Invalid JSON: `' + e.message + '`'); return; }
-              const filePath = 'blueprints/' + id + '.json';
-              fs.mkdirSync('blueprints', { recursive: true });
+              const dir      = blueprintDir(bp);
+              const filePath = dir + '/' + id + '.json';
+              const label    = [bp.year, bp.make, bp.model].filter(Boolean).join(' ');
+              fs.mkdirSync(dir, { recursive: true });
               fs.writeFileSync(filePath, JSON.stringify(bp, null, 2) + '\n');
               const index = JSON.parse(fs.readFileSync('index.json', 'utf8'));
-              const label = [bp.year, bp.make, bp.model].filter(Boolean).join(' ');
               const entry = { id, year: bp.year||'', make: bp.make||'', model: bp.model||'', label, service_count: (bp.services||[]).length, has_specs: Object.values(bp.specs||{}).some(Boolean), has_torque: (bp.torque_specs||[]).length > 0, file: filePath };
               const existing = index.findIndex(function(e) { return e.id === id; });
               if (existing >= 0) { index[existing] = entry; } else { index.push(entry); }
@@ -110,7 +127,7 @@ jobs:
               execSync('git add -A');
               execSync('git commit -m "feat: replace blueprint ' + id + ' → ' + label + ' (#' + issueNum + ')"');
               execSync('git push');
-              await postComment('♻️ **Blueprint replaced!**\n\n- Replaced ID: `' + id + '`\n- New vehicle: ' + label);
+              await postComment('♻️ **Blueprint replaced!**\n\n- Replaced ID: `' + id + '`\n- New vehicle: ' + label + '\n- File: `' + filePath + '`');
               await closeIssue();
               return;
             }
@@ -122,9 +139,10 @@ jobs:
             try { bp = JSON.parse(match[1]); } catch (e) { await postComment('❌ Blueprint JSON is invalid: `' + e.message + '`'); return; }
             if (bp.blueprint_version !== 1 || !bp.make || !bp.model) { await postComment('❌ Blueprint is missing required fields.'); return; }
             const id       = String(issueNum).padStart(8, '0');
-            const filePath = 'blueprints/' + id + '.json';
+            const dir      = blueprintDir(bp);
+            const filePath = dir + '/' + id + '.json';
             const label    = [bp.year, bp.make, bp.model].filter(Boolean).join(' ');
-            fs.mkdirSync('blueprints', { recursive: true });
+            fs.mkdirSync(dir, { recursive: true });
             fs.writeFileSync(filePath, JSON.stringify(bp, null, 2) + '\n');
             const index = JSON.parse(fs.readFileSync('index.json', 'utf8'));
             const existing = index.findIndex(e => e.id === id);
@@ -133,7 +151,7 @@ jobs:
             fs.writeFileSync('index.json', JSON.stringify(index, null, 2) + '\n');
             execSync('git config user.name  "fleet-blueprints-bot"');
             execSync('git config user.email "fleet-blueprints-bot@users.noreply.github.com"');
-            execSync('git add ' + filePath + ' index.json');
+            execSync('git add -A');
             execSync('git commit -m "feat: add blueprint ' + label + ' (#' + issueNum + ')"');
             execSync('git push');
             await postComment('✅ **Blueprint approved and merged!**\n\n- File: `' + filePath + '`\n- ID: `' + id + '`\n\nIt will appear in the app within 24 hours.');
