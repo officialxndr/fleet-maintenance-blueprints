@@ -1,13 +1,1 @@
-[
-  {
-    "id": "00000011",
-    "year": "2021",
-    "make": "Toyota",
-    "model": "Camry",
-    "label": "2021 Toyota Camry",
-    "service_count": 7,
-    "has_specs": true,
-    "has_torque": true,
-    "file": "blueprints/00000011.json"
-  }
-]
+[]
